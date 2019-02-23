@@ -6,7 +6,7 @@ Docker image to run the Python NLTK ELIZA chatbot in a web form from within a co
 How to build
 ------------
 
-    git pull https://github.com/cherdt/docker-nltk-chatbot.git
+    git clone https://github.com/cherdt/docker-nltk-chatbot.git
     cd docker-nltk-chatbot
     docker build --tag nltk-chatbot .
 
