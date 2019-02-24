@@ -44,7 +44,7 @@ def get_bot(user, hash):
     if hash not in bots or request.args.get('reload'):
        get_bot_from_gist(user, hash)
     # TODO: us a jinja2 template
-    return re.sub('<h1>[^<]+</h1>', '<h1>' + bots[hash]["name"] + '</h1>', chat_form_html).replace("Hello, what would you like to discuss today?", bots[hash]["pairs"].respond("intro")).replace("/chat-api", "/chat-api/" + user + "/" + hash).replace('<p id="credit"></p>', '<p id="credit">Bot created by ' + user + '. <a href="https://gist.github.com/' + user + '/' + hash + '">View source</a>. <a href="?reload">Reload Source</a>.</p>')
+    return re.sub('<h1>[^<]+</h1>', '<h1>' + bots[hash]["name"] + '</h1>', chat_form_html).replace("BOTNAME", bots[hash]["name"]).replace("Hello, what would you like to discuss today?", bots[hash]["pairs"].respond("intro")).replace("/chat-api", "/chat-api/" + user + "/" + hash).replace('<p id="credit"></p>', '<p id="credit">Bot created by ' + user + '. <a href="https://gist.github.com/' + user + '/' + hash + '">View source</a>. <a href="?reload">Reload Source</a>.</p>')
  
 @app.route("/chat-api/<user>/<hash>")
 def get_bot_response(user, hash):
@@ -61,4 +61,4 @@ def test():
 
 @app.route("/chat/")
 def chat():
-    return chat_form_html.replace('<p id="credit"></p>', '<p id="credit">This is a demo of the eliza submodule of the <a href="http://www.nltk.org/api/nltk.chat.html">NLTK chat module</a>.</p>')
+    return chat_form_html.replace("BOTNAME", "ELIZA").replace('<p id="credit"></p>', '<p id="credit">This is a demo of the eliza submodule of the <a href="http://www.nltk.org/api/nltk.chat.html">NLTK chat module</a>.</p>')
