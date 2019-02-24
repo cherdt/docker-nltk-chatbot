@@ -26,6 +26,19 @@
         background-color: #ddd;
         font-family: monospace;
     }
+
+    @media (max-width: 600px) {
+        #transcript {
+            font-size: larger;
+        }
+        .button,
+        .input {
+            font-size: large;
+        }
+        .input {
+            width:400px;
+        }
+    }
 </style>
 </head>
 <body>
@@ -37,8 +50,8 @@
 </div>
 
 <form id="chatform" action="#" method="GET">
-     <label><input type="text" name="text" id="text" size="50"></label>
-     <input type="submit" value="Send">
+     <label><input type="text" name="text" id="text" size="50" class="input"></label>
+     <input type="submit" value="Send" class="button">
 </form>
 
 <hr>
