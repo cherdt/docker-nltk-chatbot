@@ -39,14 +39,14 @@ def what():
     bot = nltk.chat.eliza
     return bot.eliza_chatbot.respond(text)
 
-@app.route("/bot/<user>/<hash>")
+@app.route("/chat/<user>/<hash>")
 def get_bot(user, hash):
     if hash not in bots or request.args.get('reload'):
        get_bot_from_gist(user, hash)
     # TODO: us a jinja2 template
-    return re.sub('<h1>[^<]+</h1>', '<h1>' + bots[hash]["name"] + '</h1>', chat_form_html).replace("Hello, what would you like to discuss today?", bots[hash]["pairs"].respond("intro")).replace("/chat-api", "/bot-api/" + user + "/" + hash).replace('<p id="credit"></p>', '<p id="credit">Bot created by ' + user + '. <a href="https://gist.github.com/' + user + '/' + hash + '">View source</a>.</p>')
+    return re.sub('<h1>[^<]+</h1>', '<h1>' + bots[hash]["name"] + '</h1>', chat_form_html).replace("Hello, what would you like to discuss today?", bots[hash]["pairs"].respond("intro")).replace("/chat-api", "/chat-api/" + user + "/" + hash).replace('<p id="credit"></p>', '<p id="credit">Bot created by ' + user + '. <a href="https://gist.github.com/' + user + '/' + hash + '">View source</a>.</p>')
  
-@app.route("/bot-api/<user>/<hash>")
+@app.route("/chat-api/<user>/<hash>")
 def get_bot_response(user, hash):
     if hash not in bots:
         get_bot_from_gist(user, hash)
