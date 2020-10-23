@@ -22,4 +22,9 @@ How to interact
 
 Visit http://localhost:9500/chat/
 
+Alternative build intructions
+-----------------------------
 
+Run `sh build.sh` to create the image using [buildah](https://buildah.io/)
+
+This requires that the host where you are building the image has some of the necessary dependencies, but it creates a smaller container image.
