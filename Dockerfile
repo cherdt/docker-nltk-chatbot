@@ -1,7 +1,6 @@
 FROM centos:centos7
 
-RUN /usr/bin/yum --assumeyes install release gcc
-RUN /usr/bin/yum --assumeyes install python3 python3-devel python3-pip
+RUN /usr/bin/yum --assumeyes install gcc python3 python3-devel python3-pip
 RUN /usr/bin/pip3 install Flask flask-cors nltk pyyaml requests uwsgi
 
 COPY chat.html ./
