@@ -1,18 +1,15 @@
 from flask import Flask
+from flask import render_template
 from flask import request
 from flask_cors import CORS
 import nltk.chat
 from nltk.chat.util import Chat, reflections
-import re
 import requests
 import yaml
 app = Flask(__name__)
 CORS(app)
 
 bots = {}
-
-with open('./chat.html') as f:
-    chat_form_html = f.read()
 
 def get_bot_from_gist(user, hash):
     r = requests.get('https://gist.githubusercontent.com/' + user + '/' + hash + '/raw/bot.yaml')
@@ -43,8 +40,7 @@ def what():
 def get_bot(user, hash):
     if hash not in bots or request.args.get('reload'):
        get_bot_from_gist(user, hash)
-    # TODO: us a jinja2 template
-    return re.sub('<h1>[^<]+</h1>', '<h1>' + bots[hash]["name"] + '</h1>', chat_form_html).replace("BOTNAME", bots[hash]["name"]).replace("Hello, what would you like to discuss today?", bots[hash]["pairs"].respond("intro")).replace("/chat-api", "/chat-api/" + user + "/" + hash).replace('<p id="credit"></p>', '<p id="credit">Bot created by ' + user + '. <a href="https://gist.github.com/' + user + '/' + hash + '">View source</a>. <a href="?reload">Reload Source</a>.</p>')
+    return render_template('chat.html', botname=bots[hash]["name"], user=user, intro=bots[hash]["pairs"].respond("intro"), hash=hash)
  
 @app.route("/chat-api/<user>/<hash>")
 def get_bot_response(user, hash):
@@ -61,4 +57,4 @@ def test():
 
 @app.route("/chat/")
 def chat():
-    return chat_form_html.replace("BOTNAME", "ELIZA").replace('<p id="credit"></p>', '<p id="credit">This is a demo of the eliza submodule of the <a href="http://www.nltk.org/api/nltk.chat.html">NLTK chat module</a>.</p>')
+    return render_template("chat.html", botname="ELIZA", intro="Hello, what would you like to discuss today?", hash="")

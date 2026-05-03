@@ -30,3 +30,17 @@ Alternative build intructions
 Run `sh build.sh` to create the image using [buildah](https://buildah.io/)
 
 This requires that the host where you are building the image has some of the necessary dependencies, but it creates a smaller container image.
+
+Debugging the Python Flask app
+------------------------------
+
+If you are modifying the Python script, you can run the Flask server in debug mode:
+
+    python -m flask --app chatbot run --debug
+
+Typically I create and activate a Python virtual environment and install the dependencies:
+
+    python3 -m venv venv
+    source venv/bin/activate
+    pip install -r requirements.txt
+
