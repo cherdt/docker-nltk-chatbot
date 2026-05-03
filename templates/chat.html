@@ -3,7 +3,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="utf-8">
-<title>Chat with BOTNAME</title>
+<title>Chat with {{ botname }}</title>
 <style type="text/css">
     #transcript {
         background-color:#ffc;
@@ -43,10 +43,10 @@
 </head>
 <body>
 
-<h1>Chat with Eliza</h1>
+	<h1>Chat with {{ botname }}</h1>
 
 <div id="transcript">
-<span class="bot">&gt; Hello, what would you like to discuss today?</span><br>
+	<span class="bot">&gt; {{ intro }}</span><br>
 </div>
 
 <form id="chatform" action="#" method="GET">
@@ -56,15 +56,24 @@
 
 <hr>
 
-<p id="credit"></p>
-<p>Want to make your own bot? Read the <a href=""https://osric.com/chris/accidental-developer/2022/08/diy-gist-chatbots/>bot-making instructions</a>.</p>
+{% if user %}
+<p id="credit">Credit: {{ user }}. <a href="https://gist.github.com/{{ user }}/{{ hash }}">View source</a>. <a href="?reload">Reload source</a></p>
+{% else %}
+<p id="credit">This is a demo of the eliza submodule of the <a href="http://www.nltk.org/api/nltk.chat.html">NLTK chat module</a>.</p>
+{% endif %}
+
+<p>Want to make your own bot? Read the <a href="https://osric.com/chris/accidental-developer/2022/08/diy-gist-chatbots/">bot-making instructions</a>.</p>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"
 	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
 	crossorigin="anonymous"></script>
 <script type="text/javascript">
     $("#chatform").submit(function() {
+        endpoint = '/chat-api';
+        {% if user and hash %}
+	    endpoint = endpoint + '/{{ user }}/{{ hash }}';
+	{% endif %}
         $('#transcript').append('<div><span>' + this.text.value + '</span></div>');
-        jQuery.get('/chat-api?text=' + this.text.value, 
+	    jQuery.get(endpoint + '?text=' + this.text.value, 
                     function(data) {
                        $('#transcript').append('<span class="bot">&gt; ' + data + '<br></span>');
                        $('#transcript').scrollTop($('#transcript').prop('scrollHeight'));
