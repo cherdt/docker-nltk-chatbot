@@ -69,8 +69,8 @@
 <script type="text/javascript">
     $("#chatform").submit(function() {
         endpoint = '/chat-api';
-        {% if user and hash %}
-	    endpoint = endpoint + '/{{ user }}/{{ hash }}';
+        {% if user and gist_id %}
+	    endpoint = endpoint + '/{{ user }}/{{ gist_id }}';
 	{% endif %}
         $('#transcript').append('<div><span>' + this.text.value + '</span></div>');
 	    jQuery.get(endpoint + '?text=' + this.text.value, 
