@@ -9,7 +9,7 @@ itsdangerous==2.2.0
 Jinja2==3.1.6
 joblib==1.5.3
 MarkupSafe==3.0.3
-nltk==3.9.4
+nltk==3.10.0
 pylint==4.0.6
 PyYAML==6.0.3
 regex==2026.4.4
