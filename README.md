@@ -1,7 +1,7 @@
 ELIZA chatbot Docker image
 ==========================
 
-![pylint](https://github.com/cherdt/docker-nltk-chatbot/actions/workflows/pylint.yml/badge.svg?branch=main&event=push) ![CodeQL](https://github.com/cherdt/docker-nltk-chatbot/actions/workflows/github-code-scanning/codeql/badge.svg?branch=main) ![Container Image Build](https://github.com/cherdt/docker-nltk-chatbot/actions/workflows/docker-image.yml/badge.svg?branch=main)
+![pylint](https://github.com/cherdt/docker-nltk-chatbot/actions/workflows/pylint.yml/badge.svg?branch=main&event=push) [![Dependabot](https://github.com/cherdt/docker-nltk-chatbot/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/cherdt/docker-nltk-chatbot/actions/workflows/dependabot/dependabot-updates) ![CodeQL](https://github.com/cherdt/docker-nltk-chatbot/actions/workflows/github-code-scanning/codeql/badge.svg?branch=main) ![Container Image Build](https://github.com/cherdt/docker-nltk-chatbot/actions/workflows/docker-image.yml/badge.svg?branch=main)
 
 Docker image to run the Python NLTK ELIZA chatbot in a web form from within a container. This image is also available at https://hub.docker.com/r/cherdt/nltk-chatbot/
 
